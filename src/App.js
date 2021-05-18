@@ -4,6 +4,8 @@ import Nav from './Nav';
 import Profile from './Profile';
 import Auth from './Auth/Auth';
 import Callback from './Callback';
+import Public from './Public';
+import Private from './Private';
 
 function App(props) {
     const auth = new Auth(props.history);
@@ -22,6 +24,13 @@ function App(props) {
                         ) : (
                             <Redirect to="/" />
                         )
+                    }
+                />
+                <Route path="/public" component={Public} />
+                <Route
+                    path="/private"
+                    render={(props) =>
+                        auth.isAuthenticated() ? <Private auth={auth} {...props} /> : auth.login()
                     }
                 />
             </div>
