@@ -6,6 +6,7 @@ import Auth from './Auth/Auth';
 import Callback from './Callback';
 import Public from './Public';
 import Private from './Private';
+import Catalogue from './Catalogue';
 
 function App(props) {
     const auth = new Auth(props.history);
@@ -31,6 +32,16 @@ function App(props) {
                     path="/private"
                     render={(props) =>
                         auth.isAuthenticated() ? <Private auth={auth} {...props} /> : auth.login()
+                    }
+                />
+                <Route
+                    path="/catalogue"
+                    render={(props) =>
+                        auth.isAuthenticated() && auth.userHasScopes(['read:catalogue']) ? (
+                            <Catalogue auth={auth} {...props} />
+                        ) : (
+                            auth.login()
+                        )
                     }
                 />
             </div>
