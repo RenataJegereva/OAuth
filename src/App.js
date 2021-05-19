@@ -16,9 +16,7 @@ function App(props) {
     const [tokenRenewalComplete, setTokenRenewalCompleteStatus] = useState(false);
 
     useEffect(() => {
-        console.log('auth.renewToken(): ' + auth.renewToken());
         auth.renewToken(() => setTokenRenewalCompleteStatus(true));
-        console.log('tokenRenewalComplete 2: ' + JSON.stringify(tokenRenewalComplete));
     }, [tokenRenewalComplete]);
 
     if (!tokenRenewalComplete)
