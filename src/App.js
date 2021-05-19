@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import { Redirect, Route } from 'react-router-dom';
 import Home from './Home';
 import Nav from './Nav';
@@ -8,12 +9,13 @@ import Public from './Public';
 import Private from './Private';
 import Catalogue from './Catalogue';
 import PrivateRoute from './PrivateRoute';
+import AuthContext from './AuthContext';
 
 function App(props) {
-    const auth = new Auth(props.history);
+    const [auth, setAuth] = useState(new Auth(props.history));
 
     return (
-        <>
+        <AuthContext.Provider value={auth}>
             <Nav auth={auth} />
             <div className="body">
                 <Route path="/" exact render={(props) => <Home auth={auth} {...props} />} />
@@ -28,7 +30,7 @@ function App(props) {
                     scopes={['read:catalogue']}
                 />
             </div>
-        </>
+        </AuthContext.Provider>
     );
 }
 
