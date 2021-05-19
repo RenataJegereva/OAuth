@@ -1,53 +1,77 @@
 body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
 }
 
 .body {
-  margin: 15px;
+    margin: 15px;
 }
 
 h1,
 h2,
 h3 {
-  color: #f0582a;
+    color: #f0582a;
 }
 
 button {
-  margin: 5px;
+    margin: 5px;
 }
 
 ul.unstyled {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
 }
 
 nav ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-image: linear-gradient(to bottom right, #f0582a, #eb0685);
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-image: linear-gradient(to bottom right, #f0582a, #eb0685);
 }
 
 nav li {
-  float: left;
+    float: left;
 }
 
 nav li a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
 }
 
 nav li a:hover {
-  background-color: #d9390d;
+    background-color: #d9390d;
 }
 
 nav button {
-  margin-top: 13px;
+    margin-top: 13px;
+}
+
+.spinner {
+    transform: rotate(-90deg);
+    width: 60px;
+    height: 60px;
+}
+
+.spinner .circle {
+    stroke-linecap: round;
+    stroke-dasharray: 400;
+    stroke-width: 8;
+    stroke: red;
+    fill: transparent;
+    animation: spin 1s ease-in-out 0s normal infinite;
+}
+
+@keyframes spin {
+    from {
+        stroke-dashoffset: 360;
+    }
+    to {
+        stroke-dashoffset: 40;
+    }
 }

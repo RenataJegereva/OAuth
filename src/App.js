@@ -13,6 +13,20 @@ import AuthContext from './AuthContext';
 
 function App(props) {
     const [auth, setAuth] = useState(new Auth(props.history));
+    const [tokenRenewalComplete, setTokenRenewalCompleteStatus] = useState(false);
+
+    useEffect(() => {
+        console.log('auth.renewToken(): ' + auth.renewToken());
+        auth.renewToken(() => setTokenRenewalCompleteStatus(true));
+        console.log('tokenRenewalComplete 2: ' + JSON.stringify(tokenRenewalComplete));
+    }, [tokenRenewalComplete]);
+
+    if (!tokenRenewalComplete)
+        return (
+            <svg className="spinner" role="alert" aria-live="assertive">
+                <circle cx="30" cy="30" r="20" className="circle" />
+            </svg>
+        );
 
     return (
         <AuthContext.Provider value={auth}>
