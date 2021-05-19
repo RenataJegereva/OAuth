@@ -7,6 +7,7 @@ import Callback from './Callback';
 import Public from './Public';
 import Private from './Private';
 import Catalogue from './Catalogue';
+import PrivateRoute from './PrivateRoute';
 
 function App(props) {
     const auth = new Auth(props.history);
@@ -17,32 +18,14 @@ function App(props) {
             <div className="body">
                 <Route path="/" exact render={(props) => <Home auth={auth} {...props} />} />
                 <Route path="/callback" render={(props) => <Callback auth={auth} {...props} />} />
-                <Route
-                    path="/profile"
-                    render={(props) =>
-                        auth.isAuthenticated() ? (
-                            <Profile auth={auth} {...props} />
-                        ) : (
-                            <Redirect to="/" />
-                        )
-                    }
-                />
+                <PrivateRoute path="/profile" auth={auth} component={Profile} />
                 <Route path="/public" component={Public} />
-                <Route
-                    path="/private"
-                    render={(props) =>
-                        auth.isAuthenticated() ? <Private auth={auth} {...props} /> : auth.login()
-                    }
-                />
-                <Route
+                <PrivateRoute path="/private" auth={auth} component={Private} />
+                <PrivateRoute
                     path="/catalogue"
-                    render={(props) =>
-                        auth.isAuthenticated() && auth.userHasScopes(['read:catalogue']) ? (
-                            <Catalogue auth={auth} {...props} />
-                        ) : (
-                            auth.login()
-                        )
-                    }
+                    component={Catalogue}
+                    auth={auth}
+                    scopes={['read:catalogue']}
                 />
             </div>
         </>
